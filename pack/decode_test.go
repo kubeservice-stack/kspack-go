@@ -348,4 +348,34 @@ func TestDecodeState(t *testing.T) {
 
 	bb := d.nullInterface()
 	assert.Equal(bb, nil)
+
+	e := decodeState{
+		data: []byte{KSPACK_BINARY, 2, 4, 0, 0, 0, 'a', 0, 'f', 'o', 'o', 0},
+		off:  0,
+	}
+	cc := e.binaryInterface()
+	assert.Equal(cc, []byte{'f', 'o', 'o', 0})
+
+	assert.Panics(func() { d.error(errEmptyKey) })
+
+	f := InvalidUnmarshalError{Type: nil}
+
+	assert.Equal(f.Error(), "kspack: Unmarshal(nil)")
+
+	g := decodeState{
+		data:       []byte{KSPACK_BINARY, 2, 4, 0, 0, 0, 'a', 0, 'f', 'o', 'o', 0},
+		off:        0,
+		savedError: errEmptyKey,
+	}
+	gg := g.unmarshal([]byte{})
+	assert.Error(gg)
+
+	h := decodeState{
+		data: []byte{KSPACK_BINARY, 2, 4, 0, 0, 0, 'a', 0, 'f', 'o', 'o', 'a', 'a'},
+		off:  0,
+	}
+
+	hh := h.unmarshal([]byte{})
+	assert.Error(hh)
+
 }
