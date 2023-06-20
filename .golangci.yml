@@ -1,0 +1,8 @@
+linters:
+  disable-all: true
+  enable:
+    - gosimple
+    - structcheck
+    - typecheck
+    - unused
+    - varcheck
