@@ -20,6 +20,7 @@ import (
 	"bytes"
 	"fmt"
 	"reflect"
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -335,4 +336,20 @@ func TestIsValidTag(t *testing.T) {
 	assert.True(ok)
 	ok = isValidTag("0x13df")
 	assert.True(ok)
+}
+
+func TestByNameAndByIndex(t *testing.T) {
+	assert := assert.New(t)
+	a := []field{
+		field{name: "a", index: []int{2, 6, 9}, tag: true},
+		field{name: "a", index: []int{34, 1, 59}, tag: false},
+		field{name: "a", index: []int{56}, tag: true},
+		field{name: "a", index: []int{56}, tag: false},
+	}
+	sort.Sort(byName(a))
+
+	assert.Equal(a, []field([]field{field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 9}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}}))
+
+	sort.Sort(byIndex(a))
+	assert.Equal(a, []field([]field{field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 9}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}}))
 }
