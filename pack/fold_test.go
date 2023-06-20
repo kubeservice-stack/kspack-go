@@ -69,3 +69,13 @@ func TestSimpleLetterEqualFold(t *testing.T) {
 	assert.True(simpleLetterEqualFold([]byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA")))
 	assert.False(simpleLetterEqualFold([]byte("!# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA")))
 }
+
+func TestUtf8RuneSelf(t *testing.T) {
+	assert := assert.New(t)
+	var aaa func(s, t []byte) bool
+	aaa = foldFunc([]byte{'a', 'b', 0x90, 0x80, 0x79})
+	assert.False(aaa([]byte("aa"), []byte("bb")))
+	assert.False(aaa([]byte(""), []byte("bb")))
+	assert.True(aaa([]byte("bb"), []byte("bb")))
+	assert.True(aaa([]byte("Abb"), []byte("Abb")))
+}
