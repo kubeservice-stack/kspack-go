@@ -1,6 +1,9 @@
 # kspack-go
 [![Go Reference](https://pkg.go.dev/badge/github.com/kubeservice-stack/kspack-go.svg)](https://pkg.go.dev/github.com/kubeservice-stack/kspack-go) [![Build Status](https://github.com/kubeservice-stack/kspack-go/actions/workflows/go.yml/badge.svg)](https://github.com/kubeservice-stack/kspack-go/actions/workflows/go.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/kubeservice-stack/kspack-go)](https://goreportcard.com/report/github.com/kubeservice-stack/kspack-go) [![Github release](https://img.shields.io/github/v/release/kubeservice-stack/kspack-go.svg)](https://github.com/kubeservice-stack/kspack-go/releases) [![codecov](https://codecov.io/github/kubeservice-stack/kspack-go/branch/master/graph/badge.svg?token=7w9Vii7e92)](https://codecov.io/github/kubeservice-stack/kspack-go) [![Apache-2.0 license](https://img.shields.io/github/license/kubeservice-stack/kspack-go)](https://github.com/kubeservice-stack/kspack-go/blob/master/LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/kubeservice-stack/kspack-go)](https://github.com/kubeservice-stack/kspack-go)
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/avelino/awesome-go#uncategorized)
+[![Last Commit](https://img.shields.io/github/last-commit/kubeservice-stack/kspack-go)](https://github.com/kubeservice-stack/kspack-go)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkubeservice-stack%2Fkspack-go.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkubeservice-stack%2Fkspack-go?ref=badge_shield)[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/avelino/awesome-go#uncategorized)
 
 kspack is the components for structure data encode and decode with high performance and scalability.
+
+
+## LICENSE
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkubeservice-stack%2Fkspack-go.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkubeservice-stack%2Fkspack-go?ref=badge_large)
