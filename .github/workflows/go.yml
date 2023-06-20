@@ -122,5 +122,6 @@ jobs:
       - name: Test
         run: go test -coverprofile=cover.out -coverpkg=./... ./... && go tool cover -html=cover.out -o cover.html && true
 
-      - name: Upload coverage to codecov.io
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
+          env: CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
