@@ -72,8 +72,7 @@ func TestSimpleLetterEqualFold(t *testing.T) {
 
 func TestUtf8RuneSelf(t *testing.T) {
 	assert := assert.New(t)
-	var aaa func(s, t []byte) bool
-	aaa = foldFunc([]byte{'a', 'b', 0x90, 0x80, 0x79})
+	aaa := foldFunc([]byte{'a', 'b', 0x90, 0x80, 0x79})
 	assert.False(aaa([]byte("aa"), []byte("bb")))
 	assert.False(aaa([]byte(""), []byte("bb")))
 	assert.True(aaa([]byte("bb"), []byte("bb")))
@@ -89,4 +88,5 @@ func TestUtf8RuneSelf(t *testing.T) {
 	assert.False(equalFoldRight([]byte{0x6b}, []byte{0x90}))
 	assert.False(equalFoldRight([]byte{0x73}, []byte{0x90}))
 	assert.False(equalFoldRight([]byte{0x4b, 0x53, 0x6b, 0x73}, []byte{0x90}))
+	assert.False(equalFoldRight([]byte("bb"), []byte("\u017f")))
 }
