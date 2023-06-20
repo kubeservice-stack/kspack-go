@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/kubeservice-stack/common/pkg/codec"
+	codec "github.com/kubeservice-stack/kspack-go"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -56,10 +56,10 @@ func TestMCPack(t *testing.T) {
 			"f":     map[string]float64{"a": float64(-45.2231)},
 		},
 	}
-	te, err := codec.PluginInstance(codec.MCPACK).Marshal(a)
+	te, err := codec.PluginInstance(codec.KSPACK).Marshal(a)
 	assert.Nil(err)
 	b := new(TV)
-	err = codec.PluginInstance(codec.MCPACK).Unmarshal(te, b)
+	err = codec.PluginInstance(codec.KSPACK).Unmarshal(te, b)
 	assert.Nil(err)
 	assert.Equal(b, &TV{
 		F: map[string]interface{}{
