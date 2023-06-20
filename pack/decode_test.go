@@ -87,14 +87,34 @@ var unmarshalTests = []unmarshalTest{
 		out: "foo",
 	},
 	{
+		in:  []byte{KSPACK_STRING, 0, 11, 0, 0, 0, KSPACK_SHORT_STRING, 4, 4, 'f', 'o', 'o', 0, 'b', 'a', 'r', 0},
+		ptr: new(string),
+		out: string([]byte{KSPACK_SHORT_STRING, 4, 4, 'f', 'o', 'o', 0, 'b', 'a', 'r'}),
+	},
+	{
+		in:  []byte{KSPACK_STRING, 0, 6, 0, 0, 0, KSPACK_INT32, 0, 4, 0, 0, 0},
+		ptr: new(string),
+		out: string([]byte{KSPACK_INT32, 0, 4, 0, 0}),
+	},
+	{
 		in:  []byte{KSPACK_INT32, 0, 4, 0, 0, 0},
 		ptr: new(int32),
 		out: int32(4),
 	},
 	{
+		in:  []byte{KSPACK_INT32, 0, KSPACK_INT16, 0, 0, 0},
+		ptr: new(int32),
+		out: int32(0x12),
+	},
+	{
 		in:  []byte{KSPACK_INT64, 0, 4, 0, 0, 0, 0, 0, 0, 0},
 		ptr: new(int64),
 		out: int64(4),
+	},
+	{
+		in:  []byte{KSPACK_INT64, 0, KSPACK_BOOL, 0, 1, 0, 0, 0, 0, 0},
+		ptr: new(int64),
+		out: int64(65585),
 	},
 	{
 		in:  []byte{KSPACK_BOOL, 0, 1},
