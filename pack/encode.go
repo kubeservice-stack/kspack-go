@@ -227,7 +227,7 @@ func boolEncoder(e *encodeState, k string, v reflect.Value) {
 
 // type(1) | name length(1) | raw name bytes | 0x00 | value bytes
 func int8Encoder(e *encodeState, k string, v reflect.Value) {
-	// unsupported in libmcpack, uint32 employed
+	// unsupported in libkspack, uint32 employed
 	e.resizeIfNeeded(1 + 1 + len(k) + 1 + 8)
 	e.setType(KSPACK_INT8)
 	e.setKey(k, e.setKeyLen(k))
@@ -237,7 +237,7 @@ func int8Encoder(e *encodeState, k string, v reflect.Value) {
 
 // type(1) | name length(1) | raw name bytes | 0x00 | value bytes
 func int16Encoder(e *encodeState, k string, v reflect.Value) {
-	// unsupported in libmcpack, int32 employed
+	// unsupported in libkspack, int32 employed
 	e.resizeIfNeeded(1 + 1 + len(k) + 1 + 8)
 	e.setType(KSPACK_INT16)
 	e.setKey(k, e.setKeyLen(k))
@@ -268,7 +268,7 @@ func int64Encoder(e *encodeState, k string, v reflect.Value) {
 }
 
 func uint8Encoder(e *encodeState, k string, v reflect.Value) {
-	// unsupported in libmcpack, uint32 employed
+	// unsupported in libkspack, uint32 employed
 	e.resizeIfNeeded(1 + 1 + len(k) + 1 + 8)
 	e.setType(KSPACK_UINT8)
 	e.setKey(k, e.setKeyLen(k))
@@ -277,7 +277,7 @@ func uint8Encoder(e *encodeState, k string, v reflect.Value) {
 }
 
 func uint16Encoder(e *encodeState, k string, v reflect.Value) {
-	// unsupported in libmcpack, uint32 employed
+	// unsupported in libkspack, uint32 employed
 	e.resizeIfNeeded(1 + 1 + len(k) + 1 + 8)
 	e.setType(KSPACK_UINT16)
 	e.setKey(k, e.setKeyLen(k))

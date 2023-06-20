@@ -106,6 +106,11 @@ var marshalTests = []marshalTest{
 		},
 	},
 	getTestsKeyTooLongE(),
+	getUnsupportedType(),
+	{
+		in:  [5]interface{}{1, "a", nil, KSPACK_OBJECT, KSPACK_INVALID},
+		out: []byte{0x20, 0x0, 0x2a, 0x0, 0x0, 0x0, 0x5, 0x0, 0x0, 0x0, 0x18, 0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xd0, 0x0, 0x2, 0x61, 0x0, 0x61, 0x0, 0x0, 0x18, 0x0, 0x10, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x18, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0},
+	},
 }
 
 func getTestslongVItemW() marshalTest {
@@ -146,6 +151,13 @@ func getTestsKeyBoundaryX() marshalTest {
 	return marshalTest{
 		in:  in,
 		out: out,
+	}
+}
+
+func getUnsupportedType() marshalTest {
+	return marshalTest{
+		in:  &(*(&E{})),
+		out: nil, // an nil out impiles an error
 	}
 }
 
@@ -294,7 +306,7 @@ func TestBinaryEncoder(t *testing.T) {
 	binaryEncoder(&e, "dfasdvsdghhd", reflect.ValueOf(s))
 	assert.Equal(e.off, 24)
 
-	ss := []byte("adfassdfasdfsdfsdfdfgsadfasdfsdfdf/opt/homebrew/Cellar/go/1.19.4/libexec/bin/go test -v [/Users/dongjiang/Documentsdfasdntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasdfasdf")
+	ss := []byte("adfassdfasdfsdfsdfdfgsadfasdfsdfdf/opt/homebrew/Cellar/go/1.19.4/libexec/bin/go test -v [/Users/dongjiang/Documentsdfasdntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasdfasdf")
 	binaryEncoder(&e, "dff", reflect.ValueOf(ss))
 	assert.Equal(e.off, 1192)
 }

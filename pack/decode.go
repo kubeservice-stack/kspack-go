@@ -35,7 +35,7 @@ func Unmarshal(data []byte, v interface{}) error {
 }
 
 type Unmarshaler interface {
-	UnmarshalMCPACK([]byte) error
+	UnmarshalKSPACK([]byte) error
 }
 
 type decodeState struct {
@@ -141,7 +141,7 @@ func (d *decodeState) value(v reflect.Value) {
 
 	u, pv := d.indirect(v, false)
 	if u != nil {
-		if err := u.UnmarshalMCPACK(d.next()); err != nil {
+		if err := u.UnmarshalKSPACK(d.next()); err != nil {
 			d.error(err)
 		}
 		return
@@ -401,7 +401,7 @@ func (d *decodeState) int8(v reflect.Value) {
 	v.SetInt(int64(val))
 }
 func (d *decodeState) int8Interface() interface{} {
-	// unsupported in libmcpack, int32 employed
+	// unsupported in libkspack, int32 employed
 	d.off += 1 // type
 	klen := int(Uint8(d.data[d.off:]))
 	d.off += 1 // name length
@@ -439,7 +439,7 @@ func (d *decodeState) int16(v reflect.Value) {
 	d.off += klen
 	val := Int16(d.data[d.off:])
 	d.off += 2 // value
-	// unsupported in libmcpack, int32 employed
+	// unsupported in libkspack, int32 employed
 	//d.off += 4
 	v.SetInt(int64(val))
 }
@@ -461,7 +461,7 @@ func (d *decodeState) uint16(v reflect.Value) {
 	d.off += klen
 	val := Uint16(d.data[d.off:])
 	d.off += 2 // value
-	// unsupported in libmcpack, int32 employed
+	// unsupported in libkspack, int32 employed
 	//d.off += 4
 	v.SetUint(uint64(val))
 }
@@ -950,11 +950,11 @@ type InvalidUnmarshalError struct {
 
 func (e *InvalidUnmarshalError) Error() string {
 	if e.Type == nil {
-		return "mcpack: Unmarshal(nil)"
+		return "kspack: Unmarshal(nil)"
 	}
 
 	if e.Type.Kind() != reflect.Ptr {
-		return "mcpack: Unmarshal(non-pointer " + e.Type.String() + ")"
+		return "kspack: Unmarshal(non-pointer " + e.Type.String() + ")"
 	}
-	return "mcpack: Unmarshal(nil " + e.Type.String() + ")"
+	return "kspack: Unmarshal(nil " + e.Type.String() + ")"
 }

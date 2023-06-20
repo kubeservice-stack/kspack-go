@@ -49,7 +49,7 @@ type UU struct {
 	Data []byte
 }
 
-func (u *UU) UnmarshalMCPACK(b []byte) error {
+func (u *UU) UnmarshalKSPACK(b []byte) error {
 	u.Data = b
 	return nil
 }
@@ -178,17 +178,17 @@ func TestUnmarshalObeject(t *testing.T) {
 	var b []interface{}
 	err = Unmarshal([]byte{0x20, 0x0, 0x1b, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x10, 0x0, 0xe, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0xd0, 0x5, 0x2, 0x44, 0x61, 0x74, 0x61, 0x0, 0x61, 0x0, 0x61, 0x0, 0x0}, b)
 	assert.NotNil(err)
-	assert.Equal(err.Error(), "mcpack: Unmarshal(non-pointer []interface {})")
+	assert.Equal(err.Error(), "kspack: Unmarshal(non-pointer []interface {})")
 
 	var c *int
 	err = Unmarshal([]byte{0x20, 0x0, 0x1b, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x10, 0x0, 0xe, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0xd0, 0x5, 0x2, 0x44, 0x61, 0x74, 0x61, 0x0, 0x61, 0x0, 0x61, 0x0, 0x0}, c)
 	assert.NotNil(err)
-	assert.Equal(err.Error(), "mcpack: Unmarshal(nil *int)")
+	assert.Equal(err.Error(), "kspack: Unmarshal(nil *int)")
 
 	var d []*interface{}
 	err = Unmarshal([]byte{0x20, 0x0, 0x1b, 0x0, 0x0, 0x0, 0x2, 0x0, 0x0, 0x0, 0x10, 0x0, 0xe, 0x0, 0x0, 0x0, 0x1, 0x0, 0x0, 0x0, 0xd0, 0x5, 0x2, 0x44, 0x61, 0x74, 0x61, 0x0, 0x61, 0x0, 0x61, 0x0, 0x0}, d)
 	assert.NotNil(err)
-	assert.Equal(err.Error(), "mcpack: Unmarshal(non-pointer []*interface {})")
+	assert.Equal(err.Error(), "kspack: Unmarshal(non-pointer []*interface {})")
 }
 
 func TestUV(t *testing.T) {
@@ -231,7 +231,7 @@ func TestFloat32Decodex(t *testing.T) {
 	str := new(string)
 	*str = "aadd"
 	str1 := new(string)
-	*str1 = "Users/dongjiang/Documentsdfasdntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github"
+	*str1 = "Users/dongjiang/Documentsdfasdntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github"
 	a := &V{
 		F1: map[string]interface{}{
 			"ui64":  uint64(0xFFFFFFFFFFFFFFFF),

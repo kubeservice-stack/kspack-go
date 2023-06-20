@@ -26,7 +26,7 @@ func TestFoldFunc(t *testing.T) {
 	assert := assert.New(t)
 	var aaa func(s, t []byte) bool
 	var bbb func(s, t []byte) bool
-	aaa = foldFunc([]byte("# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.com/kubeservice-stack/common/pkg/codec/mcpack.test]"))
+	aaa = foldFunc([]byte("# github.com/kubeservice-stack/common/pkg/codec/kspack [github.com/kubeservice-stack/common/pkg/codec/kspack.test]"))
 	assert.False(aaa([]byte("aa"), []byte("bb")))
 	assert.False(aaa([]byte(""), []byte("bb")))
 	assert.True(aaa([]byte("bb"), []byte("bb")))
@@ -47,7 +47,7 @@ func TestEqualFoldRight(t *testing.T) {
 	assert.True(equalFoldRight([]byte("A"), []byte("a")))
 	assert.False(equalFoldRight([]byte("b"), []byte("a")))
 	assert.True(equalFoldRight([]byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA")))
-	assert.False(equalFoldRight([]byte("!# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.coA")))
+	assert.False(equalFoldRight([]byte("!# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA")))
 	assert.False(equalFoldRight([]byte("∞¥₤€"), []byte("∞¥₤€")))
 	assert.False(equalFoldRight([]byte("∞¥₤€"), []byte("")))
 }
@@ -58,7 +58,7 @@ func TestAsciiEqualFold(t *testing.T) {
 	assert.True(asciiEqualFold([]byte("A"), []byte("a")))
 	assert.False(asciiEqualFold([]byte("b"), []byte("a")))
 	assert.True(asciiEqualFold([]byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA")))
-	assert.False(asciiEqualFold([]byte("!# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.coA")))
+	assert.False(asciiEqualFold([]byte("!# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA")))
 }
 
 func TestSimpleLetterEqualFold(t *testing.T) {
@@ -67,5 +67,5 @@ func TestSimpleLetterEqualFold(t *testing.T) {
 	assert.True(simpleLetterEqualFold([]byte("A"), []byte("a")))
 	assert.False(simpleLetterEqualFold([]byte("b"), []byte("a")))
 	assert.True(simpleLetterEqualFold([]byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpacKS [github.coA")))
-	assert.False(simpleLetterEqualFold([]byte("!# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/mcpack [github.coA")))
+	assert.False(simpleLetterEqualFold([]byte("!# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA"), []byte("# github.com/kubeservice-stack/common/pkg/codec/kspack [github.coA")))
 }

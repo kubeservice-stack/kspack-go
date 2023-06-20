@@ -29,14 +29,14 @@ type TV struct {
 	F interface{} `json:"f"`
 }
 
-func TestMCPack(t *testing.T) {
+func TestKSPack(t *testing.T) {
 	assert := assert.New(t)
 	va := new(int)
 	*va = 1
 	str := new(string)
 	*str = "dongjiang"
 	str1 := new(string)
-	*str1 = "long string users/dongjiang/Documentsdfasdntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/mcpack]asdfasntsdfasdfsdgs/go/src/github"
+	*str1 = "long string users/dongjiang/Documentsdfasdntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github.com/kubeservice-stack/common/pkg/codec/kspack]asdfasntsdfasdfsdgs/go/src/github"
 	a := &TV{
 		F: map[string]interface{}{
 			"ui64":  uint64(0xFFFFFFFFFFFFFFFF),
