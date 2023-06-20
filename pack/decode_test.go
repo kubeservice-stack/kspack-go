@@ -75,7 +75,9 @@ var unmarshalTests = []unmarshalTest{
 		ptr: &UU{},
 		out: &UU{Data: []byte{KSPACK_OBJECT, 0, 20, 0, 0, 0, 1, 0, 0, 0, KSPACK_STRING, 6, 4, 0, 0, 0, 'a', 'l', 'p', 'h', 'a', 0, 'a', '-', 'z', 0}},
 		equalFunc: func(l, r interface{}) bool {
-			var ll, rr *UU = l.(*UU), r.(*UU)
+			var ll, rr *UU
+			ll = l.(*UU)
+			rr = r.(*UU)
 			return bytes.Equal(ll.Data, rr.Data)
 		},
 	},
