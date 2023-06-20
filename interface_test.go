@@ -73,3 +73,13 @@ func TestRegister(t *testing.T) {
 	adp = codec.PluginInstance(codec.PACK("gh"))
 	assert.Nil(adp)
 }
+
+func TestRegisterPanic(t *testing.T) {
+	assert := assert.New(t)
+	aa := codec.HasRegister(codec.PACK("aaa"))
+	assert.False(aa)
+	assert.Panics(func() { codec.Register(codec.PACK("bb"), nil) })
+	codec.Register("aa", codec.NewKSPack)
+	assert.Panics(func() { codec.Register(codec.PACK("aa"), codec.NewKSPack) })
+
+}
