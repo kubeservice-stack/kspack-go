@@ -1,2 +1,6 @@
 # kspack-go
+[![Go Reference](https://pkg.go.dev/badge/github.com/kubeservice-stack/kspack-go.svg)](https://pkg.go.dev/github.com/kubeservice-stack/kspack-go) [![Build Status](https://github.com/kubeservice-stack/kspack-go/actions/workflows/go.yml/badge.svg)](https://github.com/kubeservice-stack/kspack-go/actions/workflows/go.yml) [![Go Report Card](https://goreportcard.com/badge/github.com/kubeservice-stack/kspack-go)](https://goreportcard.com/report/github.com/kubeservice-stack/kspack-go) [![Github release](https://img.shields.io/github/v/release/kubeservice-stack/kspack-go.svg)](https://github.com/kubeservice-stack/kspack-go/releases) [![codecov](https://codecov.io/github/kubeservice-stack/kspack-go/branch/main/graph/badge.svg?token=3AX3EHK96Q)](https://codecov.io/github/kubeservice-stack/kspack-go) [![Apache-2.0 license](https://img.shields.io/github/license/kubeservice-stack/kspack-go)](https://github.com/kubeservice-stack/kspack-go/blob/main/LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/kubeservice-stack/kspack-go)](https://github.com/kubeservice-stack/kspack-go)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/avelino/awesome-go#uncategorized)
+
 kspack is the components for structure data encode and decode with high performance and scalability.
