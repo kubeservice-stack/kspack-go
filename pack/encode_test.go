@@ -353,4 +353,8 @@ func TestByNameAndByIndex(t *testing.T) {
 
 	sort.Sort(byIndex(a))
 	assert.Equal(a, []field{field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 1}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: true}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}})
+
+	aa, ok := dominantField(a)
+	assert.Equal(aa, field(field{name: "", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int(nil), typ: reflect.Type(nil), omitEmpty: false}))
+	assert.False(ok)
 }
