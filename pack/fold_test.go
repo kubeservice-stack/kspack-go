@@ -78,4 +78,10 @@ func TestUtf8RuneSelf(t *testing.T) {
 	assert.False(aaa([]byte(""), []byte("bb")))
 	assert.True(aaa([]byte("bb"), []byte("bb")))
 	assert.True(aaa([]byte("Abb"), []byte("Abb")))
+
+	assert.False(equalFoldRight([]byte{0x4b}, []byte("a")))
+	assert.False(equalFoldRight([]byte{0x53}, []byte("a")))
+	assert.False(equalFoldRight([]byte{0x6b}, []byte("a")))
+	assert.False(equalFoldRight([]byte{0x73}, []byte("a")))
+	assert.False(equalFoldRight([]byte{0x4b, 0x53, 0x6b, 0x73}, []byte("a")))
 }
