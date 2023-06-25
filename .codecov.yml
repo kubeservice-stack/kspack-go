@@ -1,6 +1,7 @@
 ignore:
   - "docs/**/*.go"
   - "example/**/*"
+  - "example/**/**/*"
 
 coverage:
   range: 70..100
