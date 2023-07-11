@@ -8,9 +8,6 @@ jobs:
     name: codacy-coverage-reporter
     steps:
       - uses: actions/checkout@v2
-      
-      - name: unittest
-        run: go test ./...
         
       - name: Test
         run: go test -coverprofile=cover.out -coverpkg=./... ./...
