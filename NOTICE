@@ -1,0 +1,22 @@
+The following components are included in this product:
+
+testify
+https://github.com/stretchr/testify
+Copyright (c) 2012-2020 Mat Ryer, Tyler Bunnell and contributors.
+Licensed under the MIT License (MIT)
+
+yaml
+https://gopkg.in/yaml.v3
+Copyright (c) 2011-2019 Canonical Ltd
+Copyright (c)  staring in 2011 when the project was ported over
+Licensed under the Apache-2.0, MIT License (Apache-2.0, MIT)
+
+go-difflib
+https://github.com/pmezard/go-difflib
+Copyright (c) 2013, Patrick Mezard. All rights reserved.
+Licensed under the BSD-3-Clause License (BSD-3-Clause)
+
+go-spew
+https://github.com/davecgh/go-spew
+Copyright (c) 2012-2016 Dave Collins <dave@davec.name>
+Licensed under the ISC License (ISC)
