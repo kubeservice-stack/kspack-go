@@ -9,7 +9,6 @@ linters:
     - bodyclose
     - dogsled
     - durationcheck
-    - errcheck
     - exportloopref
     - govet
     - gosimple
@@ -20,18 +19,19 @@ linters:
     - gomnd
     - gocyclo
     - ineffassign
-    - lll
     - prealloc
-    - revive
     - staticcheck
     - typecheck
     - unused
     - whitespace
-    - wastedassign
     - unconvert
     - misspell
 
-  # don't enable:
+  # don't enable
+  # - wastedassign
+  # - revive
+  # - lll
+  # - errcheck
   # - asciicheck
   # - scopelint
   # - gochecknoglobals

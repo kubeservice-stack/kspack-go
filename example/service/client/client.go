@@ -18,7 +18,7 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 
@@ -45,7 +45,7 @@ func main() {
 			return
 		}
 
-		body, err := ioutil.ReadAll(resp.Body)
+		body, err := io.ReadAll(resp.Body)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
@@ -56,13 +56,11 @@ func main() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
-		} else {
-			w.WriteHeader(http.StatusOK)
-			w.Header().Set("Content-Type", "application/json")
-			jsonResp, _ := json.Marshal(c)
-			w.Write(jsonResp)
-			return
 		}
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+		jsonResp, _ := json.Marshal(c)
+		w.Write(jsonResp)
 	})
 
 	s := &http.Server{

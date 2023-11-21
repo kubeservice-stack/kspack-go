@@ -19,5 +19,5 @@ package codec
 type PACK string
 
 const (
-	KSPACK PACK = "kspack" //kspack 算法: like Json decode/encode
+	KSPACK PACK = "kspack" // kspack 算法: like Json decode/encode
 )
