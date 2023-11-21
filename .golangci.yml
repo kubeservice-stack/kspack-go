@@ -53,7 +53,7 @@ linters-settings:
   whitespace:
     multi-func: true
   lll:
-    line-length: 160
+    line-length: 200
   gomnd:
     # don't include the "operation", "argument" and "assign"
     checks: 
