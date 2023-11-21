@@ -81,5 +81,4 @@ func TestRegisterPanic(t *testing.T) {
 	assert.Panics(func() { codec.Register(codec.PACK("bb"), nil) })
 	codec.Register("aa", codec.NewKSPack)
 	assert.Panics(func() { codec.Register(codec.PACK("aa"), codec.NewKSPack) })
-
 }

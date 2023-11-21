@@ -77,31 +77,38 @@ var longVItem = [299]byte{250: '1', 251: '8', 252: '2', 253: '2', 297: 'S', 298:
 var marshalTests = []marshalTest{
 	{
 		in: &T{A: true, X: "x", Y: 1, Z: 2},
-		out: []byte{KSPACK_OBJECT, 0, 28, 0, 0, 0,
+		out: []byte{
+			KSPACK_OBJECT, 0, 28, 0, 0, 0,
 			3, 0, 0, 0,
 			KSPACK_BOOL, 2, 'A', 0, 1,
 			KSPACK_SHORT_STRING, 2, 2, 'X', 0, 'x', 0,
-			KSPACK_INT64, 2, 'Y', 0, 1, 0, 0, 0, 0, 0, 0, 0},
+			KSPACK_INT64, 2, 'Y', 0, 1, 0, 0, 0, 0, 0, 0, 0,
+		},
 	},
 	{
 		in: &U{Alphabet: "a-z"},
-		out: []byte{KSPACK_OBJECT, 0, 17, 0, 0, 0,
+		out: []byte{
+			KSPACK_OBJECT, 0, 17, 0, 0, 0,
 			1, 0, 0, 0,
-			KSPACK_SHORT_STRING, 6, 4, 'a', 'l', 'p', 'h', 'a', 0, 'a', '-', 'z', 0},
+			KSPACK_SHORT_STRING, 6, 4, 'a', 'l', 'p', 'h', 'a', 0, 'a', '-', 'z', 0,
+		},
 	},
 	{
 		in: &V{F1: &U{Alphabet: "a-z"}, F2: 1, F3: Number(1)},
-		out: []byte{KSPACK_OBJECT, 0, 52, 0, 0, 0,
+		out: []byte{
+			KSPACK_OBJECT, 0, 52, 0, 0, 0,
 			3, 0, 0, 0,
 			KSPACK_OBJECT, 3, 17, 0, 0, 0, 'F', '1', 0, 1, 0, 0, 0, KSPACK_SHORT_STRING, 6, 4, 'a', 'l', 'p', 'h', 'a', 0, 'a', '-', 'z', 0,
 			KSPACK_INT32, 3, 'F', '2', 0, 1, 0, 0, 0,
-			KSPACK_INT64, 3, 'F', '3', 0, 1, 0, 0, 0, 0, 0, 0, 0},
+			KSPACK_INT64, 3, 'F', '3', 0, 1, 0, 0, 0, 0, 0, 0, 0,
+		},
 	},
 	getTestslongVItemW(),
 	getTestsKeyBoundaryX(),
 	{
 		in: &Y{},
-		out: []byte{KSPACK_OBJECT, 0, 20, 0, 0, 0,
+		out: []byte{
+			KSPACK_OBJECT, 0, 20, 0, 0, 0,
 			1, 0, 0, 0,
 			KSPACK_ARRAY, 6, 4, 0, 0, 0, 'E', 'm', 'p', 't', 'y', 0, 0, 0, 0, 0,
 		},
@@ -115,7 +122,8 @@ var marshalTests = []marshalTest{
 }
 
 func getTestslongVItemW() marshalTest {
-	out := []byte{KSPACK_OBJECT, 0, 0x3e, 0x1, 0, 0,
+	out := []byte{
+		KSPACK_OBJECT, 0, 0x3e, 0x1, 0, 0,
 		2, 0, 0, 0,
 		KSPACK_STRING, 2, 0x2c, 0x1, 0, 0, 'S', 0,
 	}
@@ -135,15 +143,17 @@ func getTestsKeyBoundaryX() marshalTest {
 	deta := [2]int16{-18, -22}
 	in := &X{Beta: beta, Deta: deta}
 
-	out := []byte{KSPACK_OBJECT, 0, 0x2f, 0x1, 0, 0, //header
+	out := []byte{
+		KSPACK_OBJECT, 0, 0x2f, 0x1, 0, 0, // header
 		2, 0, 0, 0,
-		KSPACK_OBJECT, 5, 0x9, 0x1, 0, 0, //map
-		'B', 'e', 't', 'a', 0, //key: Beta | 0x0
-		1, 0, 0, 0, //count: 1
-		KSPACK_SHORT_STRING, 0xff, 3}
+		KSPACK_OBJECT, 5, 0x9, 0x1, 0, 0, // map
+		'B', 'e', 't', 'a', 0, // key: Beta | 0x0
+		1, 0, 0, 0, // count: 1
+		KSPACK_SHORT_STRING, 0xff, 3,
+	}
 	out = append(out, longVItem[:254]...)
 	out = append(out, 0, 'S', 'V', 0)
-	//Deta
+	// Deta
 	out = append(out, KSPACK_ARRAY, 5, 0xc, 0, 0, 0,
 		'D', 'e', 't', 'a', 0,
 		2, 0, 0, 0,
@@ -157,8 +167,8 @@ func getTestsKeyBoundaryX() marshalTest {
 
 func getUnsupportedType() marshalTest {
 	return marshalTest{
-		in:  &(*(&E{})),
-		out: nil, // an nil out impiles an error
+		in:  &E{}, // &(*(&E{}))
+		out: nil,  // an nil out impiles an error
 	}
 }
 
@@ -195,14 +205,13 @@ func TestMarshal(t *testing.T) {
 		if !bytes.Equal(tt.out, b) {
 			assert.Equal(tt.out, b)
 		}
-
 	}
 }
 
 func TestDominantField(t *testing.T) {
 	assert := assert.New(t)
 	aa, ok := dominantField([]field{
-		field{
+		{
 			name:      "aa",
 			nameBytes: []byte("aa"),
 		},
@@ -214,11 +223,11 @@ func TestDominantField(t *testing.T) {
 	})
 
 	bb, ok := dominantField([]field{
-		field{
+		{
 			name:      "aa",
 			nameBytes: []byte("aa"),
 		},
-		field{
+		{
 			name:      "bb",
 			nameBytes: []byte("bb"),
 		},
@@ -227,7 +236,7 @@ func TestDominantField(t *testing.T) {
 	assert.Equal(bb, field{})
 
 	cc, ok := dominantField([]field{
-		field{
+		{
 			index: []int{10, 11, 12},
 		},
 	})
@@ -237,11 +246,11 @@ func TestDominantField(t *testing.T) {
 	})
 
 	dd, ok := dominantField([]field{
-		field{
+		{
 			index: []int{1},
 			tag:   true,
 		},
-		field{
+		{
 			index: []int{1, 2, 3},
 			tag:   true,
 		},
@@ -341,20 +350,20 @@ func TestIsValidTag(t *testing.T) {
 func TestByNameAndByIndex(t *testing.T) {
 	assert := assert.New(t)
 	a := []field{
-		field{name: "a", index: []int{2, 6, 1}, tag: true},
-		field{name: "a", index: []int{34, 1, 59}, tag: false},
-		field{name: "a", index: []int{56}, tag: true},
-		field{name: "a", index: []int{56}, tag: false},
-		field{name: "a", index: []int{56}, tag: true, omitEmpty: true},
+		{name: "a", index: []int{2, 6, 1}, tag: true},
+		{name: "a", index: []int{34, 1, 59}, tag: false},
+		{name: "a", index: []int{56}, tag: true},
+		{name: "a", index: []int{56}, tag: false},
+		{name: "a", index: []int{56}, tag: true, omitEmpty: true},
 	}
 	sort.Sort(byName(a))
 
-	assert.Equal(a, []field{field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: true}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 1}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}})
+	assert.Equal(a, []field{{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: true}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 1}, typ: reflect.Type(nil), omitEmpty: false}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}})
 
 	sort.Sort(byIndex(a))
-	assert.Equal(a, []field{field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 1}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: true}, field{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}})
+	assert.Equal(a, []field{{name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{2, 6, 1}, typ: reflect.Type(nil), omitEmpty: false}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{34, 1, 59}, typ: reflect.Type(nil), omitEmpty: false}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: true, index: []int{56}, typ: reflect.Type(nil), omitEmpty: true}, {name: "a", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int{56}, typ: reflect.Type(nil), omitEmpty: false}})
 
 	aa, ok := dominantField(a)
-	assert.Equal(aa, field(field{name: "", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int(nil), typ: reflect.Type(nil), omitEmpty: false}))
+	assert.Equal(aa, field{name: "", nameBytes: []uint8(nil), equalFold: (func([]uint8, []uint8) bool)(nil), tag: false, index: []int(nil), typ: reflect.Type(nil), omitEmpty: false})
 	assert.False(ok)
 }

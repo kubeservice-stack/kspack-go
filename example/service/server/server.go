@@ -47,11 +47,9 @@ func main() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
-		} else {
-			w.WriteHeader(http.StatusOK)
-			w.Write(a)
-			return
 		}
+		w.WriteHeader(http.StatusOK)
+		w.Write(a)
 	})
 
 	s := &http.Server{
